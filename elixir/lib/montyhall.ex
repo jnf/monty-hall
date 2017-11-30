@@ -2,7 +2,7 @@ defmodule Montyhall do
   alias Montyhall.Host, as: Monty
   alias Montyhall.Contestant, as: Contestant
 
-  def new_game(plays \\ 1000) do
+  def new_game(plays \\ 1_000_000) do
     {:ok, switches_pid} = Contestant.start_link(switches: true)
     {:ok, keeps_pid} = Contestant.start_link(switches: false)
 
@@ -19,7 +19,7 @@ defmodule Montyhall do
     GenServer.stop(keeps_pid)
     GenServer.stop(switches_pid)
 
-    {:ok, results }
+    IO.puts(inspect {:ok, results })
   end
 
   defp play(pid, plays_remaining \\ 100)
